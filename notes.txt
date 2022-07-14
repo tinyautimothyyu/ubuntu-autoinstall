@@ -1,0 +1,7 @@
+# Use sed to replace 'abc' with 'XYZ' and create a back-up file
+sed -i.bak 's/abc/XYZ/g' <filename>
+# The flag -g refers to all instances
+# The flag -i performs edit in-place
+
+
+
