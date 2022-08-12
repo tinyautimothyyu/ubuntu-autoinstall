@@ -15,7 +15,7 @@ sed -i.bak "s/NISSERVER=false/NISSERVER=slave/g" /etc/default/nis
 /usr/lib/yp/ypinit -s neutsrv2.triumf.ca 
 systemctl enable ypbind
 systemctl restart ypbind
-systemctl status ypbind
+# systemctl status ypbind
 ypwhich -m
 ypcat -k passwd
 echo
@@ -48,6 +48,13 @@ then
     sed -i.bak 's/^shadow.*/shadow: files nis/g' /etc/nsswitch.conf
 else
     echo 'shadow: files nis' >> /etc/nsswitch.conf
+fi
+
+if grep '^gshadow.*' /etc/nsswitch.conf
+then
+    sed -i.bak 's/^gshadow.*/gshadow: files nis/g' /etc/nsswitch.conf
+else
+    echo 'gshadow: files nis' >> /etc/nsswitch.conf
 fi
 
 if grep '^automount.*' /etc/nsswitch.conf
