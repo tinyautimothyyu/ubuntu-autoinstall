@@ -16,8 +16,6 @@ source nis_setup.sh
 
 # disable swap
 
-# configure hostname
-
 # set up time synchronization
 source chrony.sh
 
@@ -28,6 +26,15 @@ source packages_install.sh
 
 # build ROOT
 source root.sh
+
+# adding authorized_keys
+echo ####################################
+echo
+echo adding authorized_keys
+cd scripts
+git pull
+/bin/cp ~root/git/scripts/etc/authorized_keys ~root/.ssh/
+echo
 
 # enable automatic updates
 

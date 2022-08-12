@@ -5,6 +5,8 @@ set -eu -o pipefail # fail on error and report it, debug all lines
 sudo -n true
 test $? -eq 0 || exit 1 "you should have sudo privilege to run this script"
 
+echo ####################################
+echo
 echo setting up NIS
 domainname NEUT-NIS 
 echo NEUT-NIS >> /etc/defaultdomain
@@ -16,10 +18,16 @@ systemctl restart ypbind
 systemctl status ypbind
 ypwhich -m
 ypcat -k passwd
+echo
 
+echo ####################################
+echo
 echo setting up autofs
 systemctl enable autofs
+echo
 
+echo ####################################
+echo
 echo editing /etc/nsswitch.conf
 if grep '^passwd.*' /etc/nsswitch.conf
 then
@@ -57,7 +65,11 @@ else
 fi
 
 systemctl restart autofs
+echo
 
+echo ####################################
+echo
 echo enabling hourly update of NIS maps
 cd ~/git/scripts/etc
 ln -s $PWD/ypxfr-cron-hourly /etc/cron.hourly
+echo
