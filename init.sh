@@ -54,9 +54,7 @@ mkdir -p ~root/git
 cd ~root/git
 git clone https://daq00.triumf.ca/~olchansk/git/scripts.git
 echo
-cd scripts
-git pull
-/bin/cp ~root/git/scripts/etc/authorized_keys ~root/.ssh/
+
 
 echo ####################################
 echo
