@@ -17,8 +17,8 @@ wget https://root.cern/download/root_v6.26.04.Linux-ubuntu22-x86_64-gcc11.2.tar.
 
 tar -xzvf root_v6.26.04.Linux-ubuntu22-x86_64-gcc11.2.tar.gz
 
-source root/bin/thisroot.sh
+source ~root/root/bin/thisroot.sh
 
-echo 'source root/bin/thisroot.sh' >> ~/.bashrc
+echo 'source ~root/root/bin/thisroot.sh' >> ~/.bashrc
 
 source ~/.bashrc

@@ -27,15 +27,6 @@ source packages_install.sh
 # build ROOT
 source root.sh
 
-# adding authorized_keys
-echo ####################################
-echo
-echo adding authorized_keys
-cd scripts
-git pull
-/bin/cp ~root/git/scripts/etc/authorized_keys ~root/.ssh/
-echo
-
 # enable automatic updates
 
 # IPMI instructions
