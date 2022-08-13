@@ -9,6 +9,10 @@ echo
 echo installing missing packages
 echo
 
+apt update && apt -y upgrade
+
+apt -y install software-properties-common
+add-apt-repository ppa:deadsnakes/ppa  # get PPA to install python3.8
 apt -y install ssh tcsh ethtool ncat rsync strace net-tools sysstat smartmontools lm-sensors traceroute time minicom screen git lsof
 apt -y install lsb-release
 apt -y install flex bison

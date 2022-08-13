@@ -53,6 +53,10 @@ echo pulling scripts from GitHub
 mkdir -p ~root/git
 cd ~root/git
 git clone https://daq00.triumf.ca/~olchansk/git/scripts.git
+cd scripts
+git pull
+mkdir -p ~root/.ssh
+/bin/cp ~root/git/ubuntu-autoinstall/etc/authorized_keys ~root/.ssh/
 echo
 
 
