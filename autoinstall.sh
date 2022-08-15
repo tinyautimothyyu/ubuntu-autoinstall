@@ -15,11 +15,16 @@ source move_wheel.sh
 source nis_setup.sh
 
 # disable swap
+echo
+echo disabling swap
+echo
+sed -i.bak -E 's/^\/swapfile.*/\# \/swapfile                                 none            swap    sw              0       0/g' /etc/fstab
 
 # set up time synchronization
 source chrony.sh
 
 # enable outgoing email
+source enable_email.sh
 
 # install missing packages
 source packages_install.sh
@@ -28,8 +33,10 @@ source packages_install.sh
 source root.sh
 
 # enable automatic updates
+source autoupdates.sh
 
 # IPMI instructions
+source ipmi.sh
 
 # configuring lightdm
 source lightdm.sh
@@ -48,12 +55,21 @@ systemctl disable mpd
 systemctl disable snapd
 systemctl disable ModemManager
 
-# enable elog pdf viewer
-
 # configure TRIUMF printers
 source printers.sh
 
+# enable core dump
+source core_dump.sh
+
 # enable debugger
+source enable_debugger.sh
 
 # Configure GRUB boot loader
+source grub_config.sh
+
+# Updates packages
+apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y
+
+# reboot
+shutdown -r now
 

@@ -12,6 +12,6 @@ echo
 echo installing ipmitool
 echo
 
-apt-get install ipmitool
+apt-get install -y ipmitool
 systemctl enable ipmievd
 systemctl restart ipmievd

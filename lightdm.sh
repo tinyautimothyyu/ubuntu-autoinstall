@@ -12,7 +12,6 @@ apt install -y lightdm
 echo configuring lightdm
 
 systemctl disable gdm
-systemctl disable sddm
 systemctl enable lightdm
 
 cd ~root/git/scripts/
