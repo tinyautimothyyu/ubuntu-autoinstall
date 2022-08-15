@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin//bin/bash
 
 set -eu -o pipefail # fail on error and report it, debug all lines
 
@@ -6,13 +6,13 @@ sudo -n true
 test $? -eq 0 || exit 1 "you should have sudo privilege to run this script"
 
 # initial setup
-source init.sh
+/bin/bash init.sh
 
 # move /home/wheel
-source move_wheel.sh
+/bin/bash move_wheel.sh
 
 # set up NIS
-source nis_setup.sh
+/bin/bash nis_setup.sh
 
 # disable swap
 echo
@@ -21,34 +21,34 @@ echo
 sed -i.bak -E 's/^\/swapfile.*/\# \/swapfile                                 none            swap    sw              0       0/g' /etc/fstab
 
 # set up time synchronization
-source chrony.sh
+/bin/bash chrony.sh
 
 # enable outgoing email
-source enable_email.sh
+/bin/bash enable_email.sh
 
 # install missing packages
-source packages_install.sh
+/bin/bash packages_install.sh
 
 # build ROOT
-source root.sh
+/bin/bash root.sh
 
 # enable automatic updates
-source autoupdates.sh
+/bin/bash autoupdates.sh
 
 # IPMI instructions
-source ipmi.sh
+/bin/bash ipmi.sh
 
 # configuring lightdm
-source lightdm.sh
+/bin/bash lightdm.sh
 
 # install google chrome
-source googlechrome.sh
+/bin/bash googlechrome.sh
 
 # install amanda client
-source amanda.sh
+/bin/bash amanda.sh
 
 # enable rc.local
-source rc_local.sh
+/bin/bash rc_local.sh
 
 # disable unwanted services
 systemctl disable mpd
@@ -56,16 +56,16 @@ systemctl disable snapd
 systemctl disable ModemManager
 
 # configure TRIUMF printers
-source printers.sh
+/bin/bash printers.sh
 
 # enable core dump
-source core_dump.sh
+/bin/bash core_dump.sh
 
 # enable debugger
-source enable_debugger.sh
+/bin/bash enable_debugger.sh
 
 # Configure GRUB boot loader
-source grub_config.sh
+/bin/bash grub_config.sh
 
 # Updates packages
 apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y

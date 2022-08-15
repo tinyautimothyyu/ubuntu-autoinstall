@@ -6,8 +6,8 @@ sudo -n true
 test $? -eq 0 || exit 1 "you should have sudo privilege to run this script"
 
 echo ####################################
-echo
 echo installing chrony
+echo
 
 apt-get -y install chrony
 
