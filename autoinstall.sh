@@ -6,13 +6,13 @@ sudo -n true
 test $? -eq 0 || exit 1 "you should have sudo privilege to run this script"
 
 # initial setup
-/bin/bash init.sh
+/bin/bash scripts/init.sh
 
 # move /home/wheel
-/bin/bash move_wheel.sh
+/bin/bash scripts/move_wheel.sh
 
 # set up NIS
-/bin/bash nis_setup.sh
+/bin/bash scripts/nis_setup.sh
 
 # disable swap
 echo
@@ -21,34 +21,40 @@ echo
 sed -i.bak -E 's/^\/swapfile.*/\# \/swapfile                                 none            swap    sw              0       0/g' /etc/fstab
 
 # set up time synchronization
-/bin/bash chrony.sh
+/bin/bash scripts/chrony.sh
 
 # enable outgoing email
-/bin/bash enable_email.sh
+/bin/bash scripts/enable_email.sh
 
 # install missing packages
-/bin/bash packages_install.sh
+/bin/bash scripts/packages_install.sh
+
+# install docker
+/bin/bash scripts/install_docker.sh
+
+# install singularity container
+/bin/bash scripts/install_singularioty.sh
 
 # build ROOT
-/bin/bash root.sh
+/bin/bash scripts/root.sh
 
 # enable automatic updates
-/bin/bash autoupdates.sh
+/bin/bash scripts/autoupdates.sh
 
 # IPMI instructions
-/bin/bash ipmi.sh
+/bin/bash scripts/ipmi.sh
 
 # configuring lightdm
-/bin/bash lightdm.sh
+/bin/bash scripts/lightdm.sh
 
 # install google chrome
-/bin/bash googlechrome.sh
+/bin/bash scripts/googlechrome.sh
 
 # install amanda client
-/bin/bash amanda.sh
+/bin/bash scripts/amanda.sh
 
 # enable rc.local
-/bin/bash rc_local.sh
+/bin/bash scripts/rc_local.sh
 
 # disable unwanted services
 systemctl disable mpd
@@ -56,16 +62,16 @@ systemctl disable snapd
 systemctl disable ModemManager
 
 # configure TRIUMF printers
-/bin/bash printers.sh
+/bin/bash scripts/printers.sh
 
 # enable core dump
-/bin/bash core_dump.sh
+/bin/bash scripts/core_dump.sh
 
 # enable debugger
-/bin/bash enable_debugger.sh
+/bin/bash scripts/enable_debugger.sh
 
 # Configure GRUB boot loader
-/bin/bash grub_config.sh
+/bin/bash scripts/grub_config.sh
 
 # Updates packages
 apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y

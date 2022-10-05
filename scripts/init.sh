@@ -15,6 +15,7 @@ test $? -eq 0 || exit 1 "you should have sudo privilege to run this script"
 echo ####################################
 echo
 echo installing pre-requisites
+apt update && apt -y upgrade
 apt-get update && apt-get -y upgrade
 while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
     ssh
@@ -29,13 +30,14 @@ echo
 echo ####################################
 echo
 echo setting root password
-echo -e "jes+3veTHA\njes+3veTHA" | passwd
+# echo -e "jes+3veTHA\njes+3veTHA" | passwd
+passwd
 echo
 
 echo ####################################
 echo
 echo allowing Root login by editing /etc/ssh/sshd_config
-sed -i.bak "s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g" /etc/ssh/sshd_config
+sed -i.bak "s/#PermitRootLogin prohibit-password/PermitRootLogin without-password/g" /etc/ssh/sshd_config
 sed -i.bak "s/#PasswordAuthentication yes/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 sed -i.bak "s/#LogLevel INFO/LogLevel VERBOSE/g" /etc/ssh/sshd_config
 systemctl restart sshd

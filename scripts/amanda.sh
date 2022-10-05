@@ -16,5 +16,3 @@ echo setting up amanda client
 echo
 
 echo amanda.triumf.ca amanda amdump > /etc/amandahosts
-
-# edit /etc/amandahosts
