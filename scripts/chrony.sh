@@ -8,7 +8,7 @@ test $? -eq 0 || exit 1 "you should have sudo privilege to run this script"
 echo ####################################
 echo installing chrony
 echo
-
+apt-get update && apt-get upgrade -y
 apt-get -y install chrony
 
 echo server time1.triumf.ca iburst >> /etc/chrony/chrony.conf
@@ -16,8 +16,8 @@ echo server time2.triumf.ca iburst >> /etc/chrony/chrony.conf
 echo server time3.triumf.ca iburst >> /etc/chrony/chrony.conf
 systemctl disable systemd-timesyncd.service
 systemctl stop systemd-timesyncd.service
-systemctl disable ntp
-systemctl stop ntp
+# systemctl disable ntp
+# systemctl stop ntp
 systemctl enable chrony
 systemctl restart chrony
 chronyc sources
