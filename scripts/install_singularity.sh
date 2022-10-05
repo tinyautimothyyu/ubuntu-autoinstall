@@ -11,12 +11,26 @@ echo
 
 # Installation instructions from: https://docs.sylabs.io/guides/3.0/user-guide/installation.html
 
-# Use the dropdown menus to find the best mirror for your operating system and location. 
-# For example, after selecting Ubuntu 22.04 and selecting a mirror in CA, 
-# you are instructed to add these lists:
+apt-get update && apt-get upgrade -y
 
-wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | tee /etc/apt/sources.list.d/neurodebian.sources.list && \
-    apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9 && \
-    apt-get update
+# Install necessary packages
+apt-get install -y build-essential libssl-dev uuid-dev libgpgme11-dev \
+    squashfs-tools libseccomp-dev wget pkg-config git cryptsetup debootstrap
 
-apt-get install -y singularity-container
+# Install Go
+cd ~root
+wget https://go.dev/dl/go1.18.4.linux-amd64.tar.gz
+tar -C /usr/local/ -xzvf go1.18.4.linux-amd64.tar.gz
+echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && echo 'export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin' >> ~/.bashrc &&source ~/.bashrc
+
+# Install Singularity
+wget https://github.com/sylabs/singularity/releases/download/v3.10.2/singularity-ce-3.10.2.tar.gz
+tar -xzvf singularity-ce-3.10.2.tar.gz
+cd singularity
+./mconfig
+cd  builddir/
+make
+make install
+
+. etc/bash_completion.d/singularity
+cp etc/bash_completion.d/singularity /etc/bash_completion.d/

@@ -78,5 +78,5 @@ echo ####################################
 echo
 echo enabling hourly update of NIS maps
 cd ~/git/scripts/etc
-ln -s $PWD/ypxfr-cron-hourly /etc/cron.hourly
+ln -sf $PWD/ypxfr-cron-hourly /etc/cron.hourly
 echo

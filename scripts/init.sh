@@ -67,7 +67,7 @@ echo
 echo ####################################
 echo
 echo enabling smart status
-ln -s ~/git/scripts/smart-status/smart-status.perl ~root/
+ln -sf ~/git/scripts/smart-status/smart-status.perl ~root/
 echo
 
 echo ####################################
