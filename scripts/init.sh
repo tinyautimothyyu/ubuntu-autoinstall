@@ -15,16 +15,19 @@ test $? -eq 0 || exit 1 "you should have sudo privilege to run this script"
 echo ####################################
 echo
 echo installing pre-requisites
-apt update && apt -y upgrade
 apt-get update && apt-get -y upgrade
-while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
-    ssh
-    rpcbind nis
-    git
-    autofs
-    vim
-EOF
-)
+# while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
+#     ssh
+#     rpcbind nis
+#     git
+#     autofs
+#     vim
+# EOF
+# )
+apt update && apt -y upgrade
+
+apt -y install ssh vim
+
 echo
 
 echo ####################################

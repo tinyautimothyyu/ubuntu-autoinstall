@@ -7,23 +7,23 @@ test $? -eq 0 || exit 1 "you should have sudo privilege to run this script"
 
 echo ####################################
 echo
+echo installing NIS and rpcbind
+apt -y install rpcbind nis
+echo
 echo setting up NIS
 domainname NEUT-NIS 
 echo NEUT-NIS >> /etc/defaultdomain
 echo domain NEUT-NIS broadcast >> /etc/yp.conf
+systemctl enable ypbind.service
+systemctl restart ypbind.service
+systemctl status ypbind.service
+ypwhich -m
 sed -i.bak "s/NISSERVER=false/NISSERVER=slave/g" /etc/default/nis
 /usr/lib/yp/ypinit -s neutsrv2.triumf.ca 
-systemctl enable ypbind
+systemctl enable ypserv
+systemctl restart ypserv
 systemctl restart ypbind
-# systemctl status ypbind
-ypwhich -m
 ypcat -k passwd
-echo
-
-echo ####################################
-echo
-echo setting up autofs
-systemctl enable autofs
 echo
 
 echo ####################################
@@ -70,7 +70,13 @@ then
 else
     echo 'netgroup: files nis' >> /etc/nsswitch.conf
 fi
-
+echo ####################################
+echo
+echo installing autofs
+apt -y install autofs
+echo
+echo setting up autofs
+systemctl enable autofs
 systemctl restart autofs
 echo
 
