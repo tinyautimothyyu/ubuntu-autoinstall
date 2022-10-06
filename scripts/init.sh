@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts h flag
+while getopts h: flag
 do
     case "${flag}" in
         h) hostname=${OPTARG};;
