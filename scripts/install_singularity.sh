@@ -33,7 +33,7 @@ mkdir -p $GOPATH/src/github.com/sylabs && \
 cd $GOPATH/src/github.com/sylabs && \
 wget https://github.com/sylabs/singularity/releases/download/v3.10.3/singularity-ce-3.10.3.tar.gz
 tar -xzvf singularity-ce-3.10.3.tar.gz
-cd ./singularity && \
+cd ./singularity-ce-3.10.3 && \
 ./mconfig && \
 make -C builddir && \
 make -C builddir install
