@@ -31,8 +31,8 @@ echo
 echo ####################################
 echo
 echo setting root password
-# echo -e "jes+3veTHA\njes+3veTHA" | passwd
-passwd
+echo -e "root\nroot" | passwd
+# passwd
 echo
 
 echo ####################################
